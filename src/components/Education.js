@@ -1,24 +1,21 @@
 import React from "react";
+import "../styles/index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Education() {
   return (
-    <div class="education">
-      <h1>Education</h1>
-      <div>
-        <form>
-          <div class="card">
-            <header>
-              <h3>Education #</h3>
-              <i>delete_icon_here</i>
-            </header>
-          </div>
-          <button class="add-new-card"></button>
-          <button class="previous-page"></button>
-          <button class="next-page"></button>
-        </form>
+    <div className="resume-card">
+      <header className="resume-card__header">
+        <h3 className="resume-card__h3">Education 1</h3>
+        <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />
+      </header>
+      <div className="input-grid">
+        <input type="text" placeholder="School" />
+        <input type="text" placeholder="Major" />
+        <input type="text" placeholder="Graduation date" />
       </div>
     </div>
-  )
+  );
 }
 
 export default Education;

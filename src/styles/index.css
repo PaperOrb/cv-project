@@ -1,0 +1,110 @@
+:root {
+  --primary-color: rgb(1, 212, 149);
+  --primary-dark: rgb(0, 155, 108);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 85vh;
+  padding-top: 40px;
+  background: rgba(245, 245, 245, 0.966);
+}
+
+.navbar {
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+}
+
+.resume-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 4px 3px 9px;
+  padding: 40px;
+  margin-bottom: 20px;
+}
+
+.resume-nav {
+  display: flex;
+}
+
+.resume-nav__header {
+  margin: 10px
+}
+
+.resume-card__header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding: 0 10px;
+  padding-bottom: 20px;
+}
+
+.input-grid {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.input-grid input {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  border-bottom: 1px solid;
+  margin: 10px;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.trash-icon {
+  position: absolute;
+  right: 0px;
+}
+
+.resume-form {
+  background: rgb(177, 246, 255);
+  padding: 20px;
+  min-width: 60vw;
+}
+
+.button-container {
+  display: flex; 
+  justify-content: space-between;
+  min-width: 100%;
+  margin: 15px 0;
+}
+
+.btn {
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  width: 48%;
+  transition: 250ms all;
+}
+
+.add-new-btn {
+  width: 100%;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: var(--primary-dark)
+}
