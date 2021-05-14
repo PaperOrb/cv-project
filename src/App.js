@@ -1,7 +1,5 @@
-import React from "react";
-import Education from "./components/Education";
-import Experience from "./components/Experience";
-import General from "./components/General";
+import React, { useState } from "react";
+import ResumeCard from "./components/ResumeCard";
 import "./styles/index.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -9,31 +7,57 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fab, fas);
 
 function App() {
+  const [sections, setSections] = useState(["personal", "education", "experience"]);
+  const [currentSection, setCurrentSection] = useState(sections[0]);
+  // const cardComponents = cards.map((card) => console.log(card));
+
+  let gotoPrevSection = () => {
+    setSections((prevSections) => {
+      prevSections.push(prevSections.shift());
+      console.log(prevSections);
+      return prevSections;
+    });
+  };
+
+  let handleEvent = (event) => {
+    event.preventDefault();
+    let { name } = event.target;
+    if (name === "Previous") {
+      gotoPrevSection();
+      setCurrentSection(sections[0]);
+    } else {
+      console.log("nnnnn");
+    }
+  };
+
   return (
     <div>
-      <nav class="navbar">
+      <nav className="navbar">
         <h1>CV Builder</h1>
       </nav>
 
       <main>
-        <nav class="resume-nav">
-          <h1 class="resume-nav__header">Personal</h1>
-          <h1 class="resume-nav__header">Education</h1>
-          <h1 class="resume-nav__header">Experience</h1>
+        <nav className="resume-nav">
+          <h1 className="resume-nav__header">Personal</h1>
+          <h1 className={"resume-nav__header " + 1}>Education</h1>
+          <h1 className="resume-nav__header">Experience</h1>
         </nav>
 
         <form className="resume-form">
-          <div>
-            <Education />
-            <Education />
-          </div>
+          <ResumeCard section={currentSection} />
           <div className="button-container">
-            <button className="btn add-new-btn">Add New Education</button>
+            <button className="btn add-new-btn">
+              Add New {currentSection.replace(/\b\w/g, (l) => l.toUpperCase())}
+            </button>
           </div>
 
           <div className="button-container">
-            <button className="btn">Previous</button>
-            <button className="btn">Next</button>
+            <button className="btn" name="Previous" onClick={handleEvent}>
+              Previous
+            </button>
+            <button className="btn" name="Next" onClick={handleEvent}>
+              Next
+            </button>
           </div>
         </form>
       </main>
