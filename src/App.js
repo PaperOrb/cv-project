@@ -8,15 +8,18 @@ library.add(fab, fas);
 
 function App() {
   const [sections, setSections] = useState(["personal", "education", "experience"]);
-  const [currentSection, setCurrentSection] = useState(sections[0]);
   // const cardComponents = cards.map((card) => console.log(card));
 
   let gotoPrevSection = () => {
-    setSections((prevSections) => {
-      prevSections.push(prevSections.shift());
-      console.log(prevSections);
-      return prevSections;
-    });
+    const copy = [...sections];
+    copy.push(copy.shift());
+    setSections(copy);
+  };
+
+  let gotoNextSection = () => {
+    const copy = [...sections];
+    copy.unshift(copy.pop());
+    setSections(copy);
   };
 
   let handleEvent = (event) => {
@@ -24,9 +27,8 @@ function App() {
     let { name } = event.target;
     if (name === "Previous") {
       gotoPrevSection();
-      setCurrentSection(sections[0]);
     } else {
-      console.log("nnnnn");
+      gotoNextSection();
     }
   };
 
@@ -44,11 +46,9 @@ function App() {
         </nav>
 
         <form className="resume-form">
-          <ResumeCard section={currentSection} />
+          <ResumeCard section={sections[0]} />
           <div className="button-container">
-            <button className="btn add-new-btn">
-              Add New {currentSection.replace(/\b\w/g, (l) => l.toUpperCase())}
-            </button>
+            <button className="btn add-new-btn">Add New {sections[0].replace(/\b\w/g, (l) => l.toUpperCase())}</button>
           </div>
 
           <div className="button-container">
