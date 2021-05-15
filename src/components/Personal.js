@@ -16,7 +16,7 @@ function Personal(props) {
         ...personal,
         [name]: value,
       });
-      console.log(personal);
+      console.log(props.key);
     }
   };
 

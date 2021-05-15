@@ -29,13 +29,11 @@ function App() {
 
   let handleChange = (event) => {
     event.preventDefault();
-    let { name, value, type } = event.target;
+    let { name } = event.target;
     if (name === "Previous") {
       gotoPrevSection();
-      console.log(sections);
     } else {
       gotoNextSection();
-      console.log(sections);
     }
   };
 

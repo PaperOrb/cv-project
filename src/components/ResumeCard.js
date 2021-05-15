@@ -13,7 +13,7 @@ function ResumeCard(props) {
 
   return (
     <div className="resume-card">
-      <CurrentSection handleChange={props.handleChange} />
+      <CurrentSection key={Date()} />
     </div>
   );
 }
