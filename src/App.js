@@ -10,7 +10,8 @@ library.add(fab, fas);
 
 function App() {
   const [sections, setSections] = useState(["personal", "education", "experience"]);
-  // const cardComponents = cards.map((card) => console.log(card));
+  const [education, setEducation] = useState({});
+  const [experience, setExperience] = useState({});
 
   let gotoNextSection = () => {
     const copy = [...sections];
@@ -28,7 +29,7 @@ function App() {
 
   let handleChange = (event) => {
     event.preventDefault();
-    let { name } = event.target;
+    let { name, value, type } = event.target;
     if (name === "Previous") {
       gotoPrevSection();
       console.log(sections);
@@ -48,7 +49,7 @@ function App() {
         <ResumeNav sections={sections} />
 
         <form className="resume-form">
-          <ResumeCard section={sections[0]} />
+          <ResumeCard section={sections[0]} handleChange={handleChange} />
           <ResumeButtons sections={sections} handleChange={handleChange} />
         </form>
       </main>
