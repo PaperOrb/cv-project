@@ -10,15 +10,17 @@ function App() {
   const [sections, setSections] = useState(["personal", "education", "experience"]);
   // const cardComponents = cards.map((card) => console.log(card));
 
-  let gotoPrevSection = () => {
+  let gotoNextSection = () => {
     const copy = [...sections];
-    copy.push(copy.shift());
+    const firstele = copy.shift();
+    copy.push(firstele);
     setSections(copy);
   };
 
-  let gotoNextSection = () => {
+  let gotoPrevSection = () => {
     const copy = [...sections];
-    copy.unshift(copy.pop());
+    const lastEle = copy.pop();
+    copy.unshift(lastEle);
     setSections(copy);
   };
 
@@ -27,8 +29,10 @@ function App() {
     let { name } = event.target;
     if (name === "Previous") {
       gotoPrevSection();
+      console.log(sections);
     } else {
       gotoNextSection();
+      console.log(sections);
     }
   };
 
@@ -40,9 +44,15 @@ function App() {
 
       <main>
         <nav className="resume-nav">
-          <h1 className="resume-nav__header">Personal</h1>
-          <h1 className={"resume-nav__header " + 1}>Education</h1>
-          <h1 className="resume-nav__header">Experience</h1>
+          <h1 className={"resume-nav__header " + (sections[0] === "personal" ? "resume-nav__header-underline" : "")}>
+            Personal
+          </h1>
+          <h1 className={"resume-nav__header " + (sections[0] === "education" ? "resume-nav__header-underline" : "")}>
+            Education
+          </h1>
+          <h1 className={"resume-nav__header " + (sections[0] === "experience" ? "resume-nav__header-underline" : "")}>
+            Experience
+          </h1>
         </nav>
 
         <form className="resume-form">

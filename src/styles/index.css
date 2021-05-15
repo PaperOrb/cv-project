@@ -49,6 +49,10 @@ main {
   margin: 10px
 }
 
+.resume-nav__header-underline {
+  text-decoration: underline;
+}
+
 .resume-card__header {
   position: relative;
   width: 100%;
