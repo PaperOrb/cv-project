@@ -4,7 +4,7 @@ import "../styles/index.css";
 
 function Experience() {
   return (
-    <div>
+    <div className="grid-wrapper">
       <header className="resume-card__header">
         <h3 className="resume-card__h3">Experience 1</h3>
         <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ResumeCard from "./components/ResumeCard";
+import ResumeNav from "./components/ResumeNav";
+import ResumeButtons from "./components/ResumeButtons";
 import "./styles/index.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -24,7 +26,7 @@ function App() {
     setSections(copy);
   };
 
-  let handleEvent = (event) => {
+  let handleChange = (event) => {
     event.preventDefault();
     let { name } = event.target;
     if (name === "Previous") {
@@ -43,32 +45,11 @@ function App() {
       </nav>
 
       <main>
-        <nav className="resume-nav">
-          <h1 className={"resume-nav__header " + (sections[0] === "personal" ? "resume-nav__header-underline" : "")}>
-            Personal
-          </h1>
-          <h1 className={"resume-nav__header " + (sections[0] === "education" ? "resume-nav__header-underline" : "")}>
-            Education
-          </h1>
-          <h1 className={"resume-nav__header " + (sections[0] === "experience" ? "resume-nav__header-underline" : "")}>
-            Experience
-          </h1>
-        </nav>
+        <ResumeNav sections={sections} />
 
         <form className="resume-form">
           <ResumeCard section={sections[0]} />
-          <div className="button-container">
-            <button className="btn add-new-btn">Add New {sections[0].replace(/\b\w/g, (l) => l.toUpperCase())}</button>
-          </div>
-
-          <div className="button-container">
-            <button className="btn" name="Previous" onClick={handleEvent}>
-              Previous
-            </button>
-            <button className="btn" name="Next" onClick={handleEvent}>
-              Next
-            </button>
-          </div>
+          <ResumeButtons sections={sections} handleChange={handleChange} />
         </form>
       </main>
     </div>

@@ -67,6 +67,10 @@ main {
   width: 90%;
 }
 
+.grid-wrapper {
+  width: 1000px;
+}
+
 .input-grid input {
   background-color: rgba(0, 0, 0, 0);
   border: none;

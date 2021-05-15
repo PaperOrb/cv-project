@@ -1,10 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../styles/index.css";
 
 function Personal() {
   return (
-    <div>
+    <div className="grid-wrapper">
       <header className="resume-card__header">
         <h3 className="resume-card__h3">Personal</h3>
         <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />

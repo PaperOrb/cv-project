@@ -2,7 +2,6 @@ import React from "react";
 import Education from "./Education";
 import Experience from "./Experience";
 import Personal from "./Personal";
-import "../styles/index.css";
 
 function ResumeCard(props) {
   const Components = {
