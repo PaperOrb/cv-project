@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import ResumeCard from "./components/ResumeCard";
 import ResumeNav from "./components/ResumeNav";
 import ResumeButtons from "./components/ResumeButtons";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
+import Personal from "./components/Personal";
 import "./styles/index.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -9,9 +11,10 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fab, fas);
 
 function App() {
-  const [sections, setSections] = useState(["personal", "education", "experience"]);
+  const [sections, setSections] = useState([<Personal />, <Education />, <Experience />]);
   const [education, setEducation] = useState({});
   const [experience, setExperience] = useState({});
+  let CurrentSection = sections[0];
 
   let gotoNextSection = () => {
     const copy = [...sections];
@@ -45,10 +48,9 @@ function App() {
 
       <main>
         <ResumeNav sections={sections} />
-
         <form className="resume-form">
-          <ResumeCard section={sections[0]} handleChange={handleChange} />
-          <ResumeButtons sections={sections} handleChange={handleChange} />
+          {CurrentSection}
+          <ResumeButtons sections={"sections.toString.toLowerCase()"} handleChange={handleChange} />
         </form>
       </main>
     </div>

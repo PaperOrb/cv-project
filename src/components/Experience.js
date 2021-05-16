@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../styles/index.css";
 
-function Experience() {
+function Experience(props) {
+  const [experience, setExperience] = useState({
+    name: "",
+    age: "",
+    address: "",
+  });
+
+  let handleChange = (event) => {
+    event.preventDefault();
+    let { name, value, type } = event.target;
+    if (type === "text") {
+      setExperience((prevExperience) => ({
+        ...prevExperience,
+        [name]: value,
+      }));
+      console.log(experience);
+    }
+  };
+
   return (
-    <div className="grid-wrapper">
+    <div className="resume-card">
       <header className="resume-card__header">
-        <h3 className="resume-card__h3">Experience 1</h3>
+        <h3 className="resume-card__h3">Experience</h3>
         <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />
       </header>
 
       <div className="input-grid">
-        <input type="text" placeholder="School" />
-        <input type="text" placeholder="Major" />
-        <input type="text" placeholder="Graduation date" />
+        <input type="text" value={experience.name} name="name" placeholder="Name" onChange={handleChange} />
+        <input type="text" value={experience.age} name="age" placeholder="Age" onChange={handleChange} />
+        <input type="text" value={experience.address} name="address" placeholder="Address" onChange={handleChange} />
       </div>
     </div>
   );

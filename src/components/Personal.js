@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Personal(props) {
@@ -12,16 +12,16 @@ function Personal(props) {
     event.preventDefault();
     let { name, value, type } = event.target;
     if (type === "text") {
-      setPersonal({
-        ...personal,
+      setPersonal((prevPersonal) => ({
+        ...prevPersonal,
         [name]: value,
-      });
-      console.log(props.key);
+      }));
+      console.log(personal);
     }
   };
 
   return (
-    <div className="grid-wrapper">
+    <div className="resume-card">
       <header className="resume-card__header">
         <h3 className="resume-card__h3">Personal</h3>
         <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />
