@@ -18,7 +18,7 @@ function App() {
   const [education, setEducation] = useState({});
   const [experience, setExperience] = useState({});
 
-  let handleChange = (event) => {
+  let handleClick = (event) => {
     event.preventDefault();
     let { name } = event.target;
     if (name === "Previous") {
@@ -51,7 +51,7 @@ function App() {
         <form className="resume-form">
           {sections[CurrentSection]}
           {console.log(sections[CurrentSection])}
-          <ResumeButtons sections={"sections.toString.toLowerCase()"} handleChange={handleChange} />
+          <ResumeButtons sections={"sections.toString.toLowerCase()"} handleClick={handleClick} />
         </form>
       </main>
     </div>

@@ -9,10 +9,10 @@ function ResumeButtons(props) {
         </button>
       </div>
       <div className="button-container">
-        <button className="btn" name="Previous" onClick={props.handleChange}>
+        <button className="btn" name="Previous" onClick={props.handleClick}>
           Previous
         </button>
-        <button className="btn" name="Next" onClick={props.handleChange}>
+        <button className="btn" name="Next" onClick={props.handleClick}>
           Next
         </button>
       </div>
