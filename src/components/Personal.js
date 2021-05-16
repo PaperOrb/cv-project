@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Personal(props) {
-  const [personal, setPersonal] = useState({
-    name: "",
-    age: "",
-    address: "",
+const Personal = () => {
+  const [personal, setPersonal] = useState(() => {
+    return {
+      name: "",
+      age: "",
+      address: "",
+    };
   });
 
   let handleChange = (event) => {
     event.preventDefault();
     let { name, value, type } = event.target;
-    if (type === "text") {
-      setPersonal((prevPersonal) => ({
-        ...prevPersonal,
-        [name]: value,
-      }));
-      console.log(personal);
-    }
+    const personalCopy = { ...personal };
+    personalCopy[name] = value;
+    if (type === "text") setPersonal(personalCopy);
   };
 
   return (
@@ -28,12 +26,13 @@ function Personal(props) {
       </header>
 
       <div className="input-grid">
+        {console.log(personal)}
         <input type="text" value={personal.name} name="name" placeholder="Name" onChange={handleChange} />
         <input type="text" value={personal.age} name="age" placeholder="Age" onChange={handleChange} />
         <input type="text" value={personal.address} name="address" placeholder="Address" onChange={handleChange} />
       </div>
     </div>
   );
-}
+};
 
 export default Personal;

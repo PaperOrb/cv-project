@@ -11,32 +11,32 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fab, fas);
 
 function App() {
-  const [sections, setSections] = useState([<Personal />, <Education />, <Experience />]);
+  const [sections, setSections] = useState(() => {
+    return [<Personal key={1} />, <Education key={2} />, <Experience key={3} />];
+  });
+  const [CurrentSection, setCurrentSection] = useState(() => 0);
   const [education, setEducation] = useState({});
   const [experience, setExperience] = useState({});
-  let CurrentSection = sections[0];
-
-  let gotoNextSection = () => {
-    const copy = [...sections];
-    const firstele = copy.shift();
-    copy.push(firstele);
-    setSections(copy);
-  };
-
-  let gotoPrevSection = () => {
-    const copy = [...sections];
-    const lastEle = copy.pop();
-    copy.unshift(lastEle);
-    setSections(copy);
-  };
 
   let handleChange = (event) => {
     event.preventDefault();
     let { name } = event.target;
     if (name === "Previous") {
-      gotoPrevSection();
+      setCurrentSection((prevCurrentSection) => {
+        if (CurrentSection < 1) {
+          return 2;
+        } else {
+          return --prevCurrentSection;
+        }
+      });
     } else {
-      gotoNextSection();
+      setCurrentSection((prevCurrentSection) => {
+        if (CurrentSection > 1) {
+          return 0;
+        } else {
+          return ++prevCurrentSection;
+        }
+      });
     }
   };
 
@@ -49,7 +49,8 @@ function App() {
       <main>
         <ResumeNav sections={sections} />
         <form className="resume-form">
-          {CurrentSection}
+          {sections[CurrentSection]}
+          {console.log(sections[CurrentSection])}
           <ResumeButtons sections={"sections.toString.toLowerCase()"} handleChange={handleChange} />
         </form>
       </main>
