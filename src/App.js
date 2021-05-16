@@ -11,30 +11,28 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fab, fas);
 
 function App() {
-  const [sections, setSections] = useState(() => {
-    return [<Personal key={1} />, <Education key={2} />, <Experience key={3} />];
-  });
-  const [CurrentSection, setCurrentSection] = useState(() => 0);
-  const [education, setEducation] = useState({});
-  const [experience, setExperience] = useState({});
+  const [currentComponentIndex, setCurrentComponentIndex] = useState(() => 0);
+  const [componentsArr, saveComponentsArr] = useState([{}, {}, {}]); // persists the personal, education, and experience states upon umount
+  const sections = [Personal, Education, Experience];
+  let CurrentComponent = sections[currentComponentIndex];
 
   let handleClick = (event) => {
     event.preventDefault();
     let { name } = event.target;
     if (name === "Previous") {
-      setCurrentSection((prevCurrentSection) => {
-        if (CurrentSection < 1) {
+      setCurrentComponentIndex((prevCurrentComponentIndex) => {
+        if (currentComponentIndex < 1) {
           return 2;
         } else {
-          return --prevCurrentSection;
+          return --prevCurrentComponentIndex;
         }
       });
     } else {
-      setCurrentSection((prevCurrentSection) => {
-        if (CurrentSection > 1) {
+      setCurrentComponentIndex((prevCurrentComponentIndex) => {
+        if (currentComponentIndex > 1) {
           return 0;
         } else {
-          return ++prevCurrentSection;
+          return ++prevCurrentComponentIndex;
         }
       });
     }
@@ -49,8 +47,11 @@ function App() {
       <main>
         <ResumeNav sections={sections} />
         <form className="resume-form">
-          {sections[CurrentSection]}
-          {console.log(sections[CurrentSection])}
+          <CurrentComponent
+            componentsArr={componentsArr}
+            saveComponentsArr={saveComponentsArr}
+            currentComponentIndex={currentComponentIndex}
+          />
           <ResumeButtons sections={"sections.toString.toLowerCase()"} handleClick={handleClick} />
         </form>
       </main>

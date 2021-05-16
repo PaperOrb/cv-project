@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Education(props) {
-  const [education, setEducation] = useState({
-    name: "",
-    age: "",
-    address: "",
+function Education({ componentsArr, saveComponentsArr, currentComponentIndex }) {
+  const [education, setEducation] = useState(componentsArr[currentComponentIndex]);
+  saveComponentsArr((prevComponentState) => {
+    prevComponentState[currentComponentIndex] = education;
+    return prevComponentState;
   });
 
-  let handleChange = (event) => {
-    event.preventDefault();
+  let handleInput = (event) => {
     let { name, value, type } = event.target;
-    if (type === "text") {
-      setEducation((prevEducation) => ({
-        ...prevEducation,
-        [name]: value,
-      }));
-      console.log(education);
-    }
+    const educationCopy = { ...education };
+    educationCopy[name] = value;
+    if (type === "text") setEducation(educationCopy);
   };
 
   return (
@@ -28,9 +23,9 @@ function Education(props) {
       </header>
 
       <div className="input-grid">
-        <input type="text" value={education.name} name="name" placeholder="Name" onChange={handleChange} />
-        <input type="text" value={education.age} name="age" placeholder="Age" onChange={handleChange} />
-        <input type="text" value={education.address} name="address" placeholder="Address" onChange={handleChange} />
+        <input type="text" value={education.name} name="name" placeholder="Name" onChange={handleInput} />
+        <input type="text" value={education.age} name="age" placeholder="Age" onChange={handleInput} />
+        <input type="text" value={education.address} name="address" placeholder="Address" onChange={handleInput} />
       </div>
     </div>
   );

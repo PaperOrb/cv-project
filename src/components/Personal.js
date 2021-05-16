@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Personal = () => {
-  const [personal, setPersonal] = useState({
-    name: "",
-    age: "",
-    address: "",
+const Personal = ({ componentsArr, saveComponentsArr, currentComponentIndex }) => {
+  const [personal, setPersonal] = useState(componentsArr[currentComponentIndex]);
+  saveComponentsArr((prevComponentArr) => {
+    prevComponentArr[currentComponentIndex] = personal;
+    return prevComponentArr;
   });
 
   let handleInput = (event) => {
@@ -23,7 +23,6 @@ const Personal = () => {
       </header>
 
       <div className="input-grid">
-        {console.log(personal)}
         <input type="text" value={personal.name} name="name" placeholder="Name" onChange={handleInput} />
         <input type="text" value={personal.age} name="age" placeholder="Age" onChange={handleInput} />
         <input type="text" value={personal.address} name="address" placeholder="Address" onChange={handleInput} />
