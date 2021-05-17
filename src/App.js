@@ -46,7 +46,7 @@ function App() {
       </nav>
 
       <main>
-        <ResumeNav sections={sections} />
+        <ResumeNav sectionTitle={sectionsStrings[currentComponentIndex]} />
         <form className="resume-form">
           <CurrentComponent
             componentsArr={componentsArr}
