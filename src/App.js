@@ -14,6 +14,7 @@ function App() {
   const [currentComponentIndex, setCurrentComponentIndex] = useState(() => 0);
   const [componentsArr, saveComponentsArr] = useState([{}, {}, {}]); // persists the personal, education, and experience states upon umount
   const sections = [Personal, Education, Experience];
+  const sectionsStrings = ["Personal", "Education", "Experience"];
   let CurrentComponent = sections[currentComponentIndex];
 
   let handleClick = (event) => {
@@ -52,7 +53,7 @@ function App() {
             saveComponentsArr={saveComponentsArr}
             currentComponentIndex={currentComponentIndex}
           />
-          <ResumeButtons sections={"sections.toString.toLowerCase()"} handleClick={handleClick} />
+          <ResumeButtons sectionTitle={sectionsStrings[currentComponentIndex]} handleClick={handleClick} />
         </form>
       </main>
     </div>
