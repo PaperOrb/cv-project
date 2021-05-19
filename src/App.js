@@ -31,15 +31,7 @@ function App() {
   };
 
   let newComponent = (Component, index, data = {}) => {
-    return (
-      <Component
-        handleInput={handleInput}
-        componentsData={data}
-        saveData={saveData}
-        currentCompIndex={index}
-        key={index}
-      />
-    );
+    return <Component handleInput={handleInput} componentsData={data} currentCompIndex={index} key={index} />;
   };
 
   let renderComponents = () => {
