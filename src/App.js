@@ -17,25 +17,41 @@ function App() {
   let CurrentComponent = [Personal, Education, Experience][currentSectionIndex];
 
   let newComponentData = () => {
-    const copy = [...componentsData];
+    const copy = JSON.parse(JSON.stringify(componentsData));
     copy[currentSectionIndex].push({});
     saveComponentsData(copy);
   };
 
   let saveData = (data, index) => {
     saveComponentsData((prevComponentArr) => {
-      let copy = [...prevComponentArr];
+      let copy = JSON.parse(JSON.stringify(prevComponentArr));
       copy[currentSectionIndex][index] = data;
       return copy;
     });
   };
 
+  let deleteForm = (formIndex) => {
+    saveComponentsData((prevComponentArr) => {
+      let copy = JSON.parse(JSON.stringify(prevComponentArr));
+      copy[currentSectionIndex].splice(formIndex, 1);
+      return copy;
+    });
+  };
+
   let newComponent = (Component, index, data = {}) => {
-    return <Component handleInput={handleInput} componentsData={data} currentCompIndex={index} key={index} />;
+    return (
+      <Component
+        deleteForm={deleteForm}
+        handleInput={handleInput}
+        componentsData={data}
+        currentCompIndex={index}
+        key={index}
+      />
+    );
   };
 
   let renderComponents = () => {
-    let currentSection = componentsData[currentSectionIndex];
+    let currentSection = JSON.parse(JSON.stringify(componentsData[currentSectionIndex]));
     return currentSection.map((data, index) => {
       return newComponent(CurrentComponent, index, data);
     });
@@ -65,7 +81,7 @@ function App() {
 
   let handleInput = (event, currentCompIndex, data, setData) => {
     let { name, value, type } = event.target;
-    const dataCopy = { ...data };
+    const dataCopy = JSON.parse(JSON.stringify(data));
     dataCopy[name] = value;
     if (type === "text") setData(dataCopy);
     saveData(dataCopy, currentCompIndex);
@@ -83,17 +99,20 @@ function App() {
 
       <main>
         <ResumeNav sectionTitle={sectionsStrings[currentSectionIndex]} />
-        <form className="resume-form" onSubmit={handleSubmit}>
-          {renderComponents()}
-          <ResumeButtons
-            newComponentData={newComponentData}
-            sectionTitle={sectionsStrings[currentSectionIndex]}
-            navigateSections={navigateSections}
-          />
-        </form>
+        <FormContext.Provider value={deleteForm}>
+          <form className="resume-form" onSubmit={handleSubmit}>
+            {renderComponents()}
+            <ResumeButtons
+              newComponentData={newComponentData}
+              sectionTitle={sectionsStrings[currentSectionIndex]}
+              navigateSections={navigateSections}
+            />
+          </form>
+        </FormContext.Provider>
       </main>
     </div>
   );
 }
 
 export default App;
+export const FormContext = React.createContext();

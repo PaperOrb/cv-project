@@ -80,13 +80,23 @@ main {
   outline: none;
 }
 
-.trash-icon {
+.trash-button {
+  display: flex;
+  justify-content: center;
   position: absolute;
   right: 0px;
+  width: 15px;
+  height: 20px;
+  background: none;
+  border: none;
+}
+
+.trash-icon:hover {
+  cursor: pointer;
+  transform: scale(120%);
 }
 
 .resume-form {
-  background: rgb(177, 246, 255);
   padding: 20px;
   min-width: 60vw;
 }
