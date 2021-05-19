@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import FormHeader from "./FormHeader";
 
-const Experience = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
+const Experience = ({ componentsData, saveData, currentCompIndex }) => {
   const [experience, setExperience] = useState(componentsData);
-
-  let saveData = (data) => {
-    saveComponentsData((prevComponentArr) => {
-      let copy = [...prevComponentArr];
-      copy[currentSectionIndex][currentCompIndex] = data;
-      return copy;
-    });
-  };
 
   let handleInput = (event) => {
     let { name, value, type } = event.target;
     const experienceCopy = { ...experience };
     experienceCopy[name] = value;
     if (type === "text") setExperience(experienceCopy);
-    saveData(experienceCopy);
+    saveData(experienceCopy, currentCompIndex);
   };
 
   return (

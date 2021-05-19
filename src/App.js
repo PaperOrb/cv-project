@@ -22,11 +22,19 @@ function App() {
     saveComponentsData(copy);
   };
 
+  let saveData = (data, index) => {
+    saveComponentsData((prevComponentArr) => {
+      let copy = [...prevComponentArr];
+      copy[currentSectionIndex][index] = data;
+      return copy;
+    });
+  };
+
   let newComponent = (Component, index, data = {}) => {
     return (
       <Component
         componentsData={data}
-        saveComponentsData={saveComponentsData}
+        saveData={saveData}
         currentSectionIndex={currentSectionIndex}
         currentCompIndex={index}
         key={index}

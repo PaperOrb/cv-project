@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import FormHeader from "./FormHeader";
 
-const Personal = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
+const Personal = ({ componentsData, saveData, currentCompIndex }) => {
   const [personal, setPersonal] = useState(componentsData);
-
-  let saveData = (data) => {
-    saveComponentsData((prevComponentArr) => {
-      let copy = [...prevComponentArr];
-      copy[currentSectionIndex][currentCompIndex] = data;
-      return copy;
-    });
-  };
 
   let handleInput = (event) => {
     let { name, value, type } = event.target;
     const personalCopy = { ...personal };
     personalCopy[name] = value;
     if (type === "text") setPersonal(personalCopy);
-    saveData(personalCopy);
+    saveData(personalCopy, currentCompIndex);
   };
 
   return (
