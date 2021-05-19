@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Experience(props) {
-  const [experience, setExperience] = useState({
-    name: "",
-    age: "",
-    address: "",
+const Experience = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
+  const [experience, setPersonal] = useState(componentsData);
+  saveComponentsData((prevComponentArr) => {
+    let copy = [...prevComponentArr];
+    copy[currentSectionIndex][currentCompIndex] = experience;
+    return copy;
   });
+  let saveData = () => {};
 
-  let handleChange = (event) => {
-    event.preventDefault();
+  let handleInput = (event) => {
     let { name, value, type } = event.target;
-    if (type === "text") {
-      setExperience((prevExperience) => ({
-        ...prevExperience,
-        [name]: value,
-      }));
-      console.log(experience);
-    }
+    const personalCopy = { ...experience };
+    personalCopy[name] = value;
+    if (type === "text") setPersonal(personalCopy);
+    // saveData();
   };
 
   return (
@@ -28,12 +26,18 @@ function Experience(props) {
       </header>
 
       <div className="input-grid">
-        <input type="text" value={experience.name} name="name" placeholder="Name" onChange={handleChange} />
-        <input type="text" value={experience.age} name="age" placeholder="Age" onChange={handleChange} />
-        <input type="text" value={experience.address} name="address" placeholder="Address" onChange={handleChange} />
+        <input type="text" value={experience.name || ""} name="name" placeholder="Name" onChange={handleInput} />
+        <input type="text" value={experience.age || ""} name="age" placeholder="Age" onChange={handleInput} />
+        <input
+          type="text"
+          value={experience.address || ""}
+          name="address"
+          placeholder="Address"
+          onChange={handleInput}
+        />
       </div>
     </div>
   );
-}
+};
 
 export default Experience;

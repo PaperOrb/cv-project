@@ -11,32 +11,60 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fab, fas);
 
 function App() {
-  const [currentComponentIndex, setCurrentComponentIndex] = useState(() => 0);
-  const [componentsArr, saveComponentsArr] = useState([{}, {}, {}]); // persists the personal, education, and experience states upon umount
-  const sections = [Personal, Education, Experience];
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(() => 0);
+  const [componentsData, saveComponentsData] = useState([[{}], [{}], [{}]]); // persists the personal, education, and experience states upon umount
   const sectionsStrings = ["Personal", "Education", "Experience"];
-  let CurrentComponent = sections[currentComponentIndex];
+  let CurrentComponent = [Personal, Education, Experience][currentSectionIndex];
 
-  let handleClick = (event) => {
+  let newComponentData = () => {
+    const copy = [...componentsData];
+    copy[currentSectionIndex].push({});
+    saveComponentsData(copy);
+  };
+
+  let newComponent = (Component, index, data = {}) => {
+    return (
+      <Component
+        componentsData={data}
+        saveComponentsData={saveComponentsData}
+        currentSectionIndex={currentSectionIndex}
+        currentCompIndex={index}
+        key={index}
+      />
+    );
+  };
+
+  let renderComponents = () => {
+    let currentSection = componentsData[currentSectionIndex];
+    return currentSection.map((data, index) => {
+      return newComponent(CurrentComponent, index, data);
+    });
+  };
+
+  let navigateSections = (event) => {
     event.preventDefault();
     let { name } = event.target;
     if (name === "Previous") {
-      setCurrentComponentIndex((prevCurrentComponentIndex) => {
-        if (currentComponentIndex < 1) {
+      setCurrentSectionIndex((prevCurrentComponentIndex) => {
+        if (currentSectionIndex < 1) {
           return 2;
         } else {
           return --prevCurrentComponentIndex;
         }
       });
     } else {
-      setCurrentComponentIndex((prevCurrentComponentIndex) => {
-        if (currentComponentIndex > 1) {
+      setCurrentSectionIndex((prevCurrentComponentIndex) => {
+        if (currentSectionIndex > 1) {
           return 0;
         } else {
           return ++prevCurrentComponentIndex;
         }
       });
     }
+  };
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -46,14 +74,14 @@ function App() {
       </nav>
 
       <main>
-        <ResumeNav sectionTitle={sectionsStrings[currentComponentIndex]} />
-        <form className="resume-form">
-          <CurrentComponent
-            componentsArr={componentsArr}
-            saveComponentsArr={saveComponentsArr}
-            currentComponentIndex={currentComponentIndex}
+        <ResumeNav sectionTitle={sectionsStrings[currentSectionIndex]} />
+        <form className="resume-form" onSubmit={handleSubmit}>
+          {renderComponents()}
+          <ResumeButtons
+            newComponentData={newComponentData}
+            sectionTitle={sectionsStrings[currentSectionIndex]}
+            navigateSections={navigateSections}
           />
-          <ResumeButtons sectionTitle={sectionsStrings[currentComponentIndex]} handleClick={handleClick} />
         </form>
       </main>
     </div>

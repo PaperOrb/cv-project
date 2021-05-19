@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Education({ componentsArr, saveComponentsArr, currentComponentIndex }) {
-  const [education, setEducation] = useState(componentsArr[currentComponentIndex]);
-  saveComponentsArr((prevComponentState) => {
-    prevComponentState[currentComponentIndex] = education;
-    return prevComponentState;
-  });
+const Education = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
+  const [education, setPersonal] = useState(componentsData);
+
+  let saveData = () => {
+    saveComponentsData((prevComponentArr) => {
+      let copy = [...prevComponentArr];
+      copy[currentSectionIndex][currentCompIndex] = education;
+      return copy;
+    });
+  };
 
   let handleInput = (event) => {
     let { name, value, type } = event.target;
-    const educationCopy = { ...education };
-    educationCopy[name] = value;
-    if (type === "text") setEducation(educationCopy);
+    const personalCopy = { ...education };
+    personalCopy[name] = value;
+    if (type === "text") setPersonal(personalCopy);
+    saveData();
   };
 
   return (
@@ -23,12 +28,18 @@ function Education({ componentsArr, saveComponentsArr, currentComponentIndex }) 
       </header>
 
       <div className="input-grid">
-        <input type="text" value={education.name} name="name" placeholder="Name" onChange={handleInput} />
-        <input type="text" value={education.age} name="age" placeholder="Age" onChange={handleInput} />
-        <input type="text" value={education.address} name="address" placeholder="Address" onChange={handleInput} />
+        <input type="text" value={education.name || ""} name="name" placeholder="Name" onChange={handleInput} />
+        <input type="text" value={education.age || ""} name="age" placeholder="Age" onChange={handleInput} />
+        <input
+          type="text"
+          value={education.address || ""}
+          name="address"
+          placeholder="Address"
+          onChange={handleInput}
+        />
       </div>
     </div>
   );
-}
+};
 
 export default Education;
