@@ -33,9 +33,9 @@ function App() {
   let newComponent = (Component, index, data = {}) => {
     return (
       <Component
+        handleInput={handleInput}
         componentsData={data}
         saveData={saveData}
-        currentSectionIndex={currentSectionIndex}
         currentCompIndex={index}
         key={index}
       />
@@ -69,6 +69,14 @@ function App() {
         }
       });
     }
+  };
+
+  let handleInput = (event, currentCompIndex, data, setData) => {
+    let { name, value, type } = event.target;
+    const dataCopy = { ...data };
+    dataCopy[name] = value;
+    if (type === "text") setData(dataCopy);
+    saveData(dataCopy, currentCompIndex);
   };
 
   let handleSubmit = (event) => {
