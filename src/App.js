@@ -89,6 +89,7 @@ function App() {
 
   let handleSubmit = (event) => {
     event.preventDefault();
+    console.log("yep");
   };
 
   return (
