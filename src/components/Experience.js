@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Experience = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
-  const [experience, setPersonal] = useState(componentsData);
-  saveComponentsData((prevComponentArr) => {
-    let copy = [...prevComponentArr];
-    copy[currentSectionIndex][currentCompIndex] = experience;
-    return copy;
-  });
-  let saveData = () => {};
+  const [experience, setExperience] = useState(componentsData);
+
+  let saveData = (data) => {
+    saveComponentsData((prevComponentArr) => {
+      let copy = [...prevComponentArr];
+      copy[currentSectionIndex][currentCompIndex] = data;
+      return copy;
+    });
+  };
 
   let handleInput = (event) => {
     let { name, value, type } = event.target;
-    const personalCopy = { ...experience };
-    personalCopy[name] = value;
-    if (type === "text") setPersonal(personalCopy);
-    // saveData();
+    const experienceCopy = { ...experience };
+    experienceCopy[name] = value;
+    if (type === "text") setExperience(experienceCopy);
+    saveData(experienceCopy);
   };
 
   return (

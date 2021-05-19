@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Personal = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
   const [personal, setPersonal] = useState(componentsData);
 
-  let saveData = () => {
+  let saveData = (data) => {
     saveComponentsData((prevComponentArr) => {
       let copy = [...prevComponentArr];
-      copy[currentSectionIndex][currentCompIndex] = personal;
+      copy[currentSectionIndex][currentCompIndex] = data;
       return copy;
     });
   };
@@ -17,7 +17,7 @@ const Personal = ({ componentsData, saveComponentsData, currentSectionIndex, cur
     const personalCopy = { ...personal };
     personalCopy[name] = value;
     if (type === "text") setPersonal(personalCopy);
-    saveData();
+    saveData(personalCopy);
   };
 
   return (

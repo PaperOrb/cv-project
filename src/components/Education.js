@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Education = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
-  const [education, setPersonal] = useState(componentsData);
+  const [education, setEducation] = useState(componentsData);
 
-  let saveData = () => {
+  let saveData = (data) => {
     saveComponentsData((prevComponentArr) => {
       let copy = [...prevComponentArr];
-      copy[currentSectionIndex][currentCompIndex] = education;
+      copy[currentSectionIndex][currentCompIndex] = data;
       return copy;
     });
   };
 
   let handleInput = (event) => {
     let { name, value, type } = event.target;
-    const personalCopy = { ...education };
-    personalCopy[name] = value;
-    if (type === "text") setPersonal(personalCopy);
-    saveData();
+    const educationCopy = { ...education };
+    educationCopy[name] = value;
+    if (type === "text") setEducation(educationCopy);
+    saveData(educationCopy);
   };
 
   return (
