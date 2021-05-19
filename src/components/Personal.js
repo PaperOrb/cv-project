@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FormHeader from "./FormHeader";
 
 const Personal = ({ componentsData, saveComponentsData, currentSectionIndex, currentCompIndex }) => {
   const [personal, setPersonal] = useState(componentsData);
@@ -22,10 +22,7 @@ const Personal = ({ componentsData, saveComponentsData, currentSectionIndex, cur
 
   return (
     <div className="resume-card">
-      <header className="resume-card__header">
-        <h3 className="resume-card__h3">Personal</h3>
-        <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />
-      </header>
+      <FormHeader formIndex={currentCompIndex} sectionTitle="Personal" />
 
       <div className="input-grid">
         <input type="text" value={personal.name || ""} name="name" placeholder="Name" onChange={handleInput} />
