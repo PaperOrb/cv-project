@@ -4,6 +4,7 @@ import ResumeButtons from "./components/ResumeButtons";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import Personal from "./components/Personal";
+import FinalResume from "./components/FinalResume";
 import "./styles/index.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -13,13 +14,14 @@ library.add(fab, fas);
 
 function App() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(() => 0);
-  const sectionsStrings = ["Personal", "Education", "Experience"];
+  const sectionsStrings = ["Personal", "Education", "Experience", "Final Resume"];
   const [personal, setPersonal] = useState([{}]);
   const [education, setEducation] = useState([{}]);
   const [experience, setExperience] = useState([{}]);
-  let CurrentComponent = [Personal, Education, Experience][currentSectionIndex];
-  let currentSectionState = [personal, education, experience][currentSectionIndex];
-  let currentFormSetState = [setPersonal, setEducation, setExperience][currentSectionIndex];
+  const [finalResume, setFinalResume] = useState([personal, education, experience]);
+  let CurrentComponent = [Personal, Education, Experience, FinalResume][currentSectionIndex];
+  let currentSectionState = [personal, education, experience, finalResume][currentSectionIndex];
+  let currentFormSetState = [setPersonal, setEducation, setExperience, setFinalResume][currentSectionIndex];
 
   let newComponentData = () => {
     const copy = JSON.parse(JSON.stringify(currentSectionState));
@@ -66,7 +68,7 @@ function App() {
       });
     } else {
       setCurrentSectionIndex((prevCurrentComponentIndex) => {
-        if (currentSectionIndex > 1) {
+        if (currentSectionIndex > 2) {
           return 0;
         } else {
           return ++prevCurrentComponentIndex;

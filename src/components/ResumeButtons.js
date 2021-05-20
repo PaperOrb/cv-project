@@ -2,7 +2,7 @@ import React from "react";
 
 function ResumeButtons({ sectionTitle, navigateSections, newComponentData }) {
   let AddNewBtn = () => {
-    if (sectionTitle === "Personal") {
+    if (["Personal", "Final Resume"].includes(sectionTitle)) {
       return "";
     } else {
       return (
@@ -18,7 +18,7 @@ function ResumeButtons({ sectionTitle, navigateSections, newComponentData }) {
       case "Personal":
         return (
           <div className="button-container">
-            <button className="btn btn-big" name="Next" onClick={navigateSections}>
+            <button className="btn btn-lg" name="Next" onClick={navigateSections}>
               Next
             </button>
           </div>
@@ -45,10 +45,17 @@ function ResumeButtons({ sectionTitle, navigateSections, newComponentData }) {
             </button>
           </div>
         );
+      case "Final Resume":
+        return (
+          <button className="btn btn-lg" name="Previous" onClick={navigateSections}>
+            Previous
+          </button>
+        );
       default:
         break;
     }
   };
+
   return (
     <div>
       <div className="button-container">
