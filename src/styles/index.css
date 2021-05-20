@@ -1,6 +1,8 @@
 :root {
-  --primary-color: rgb(1, 212, 149);
-  --primary-dark: rgb(0, 155, 108);
+  --primary-color: rgb(30, 63, 93);
+  --primary-dark: rgb(47, 97, 144);
+  --secondary: rgb(0, 155, 108);
+  --secondary-dark: rgb(1, 212, 149);
 }
 
 * {
@@ -24,10 +26,12 @@ main {
 
 .navbar {
   background: var(--primary-color);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 15vh;
+  height: 10vh;
+  font-size: 1.5rem;
 }
 
 .resume-card {
@@ -41,16 +45,22 @@ main {
   margin-bottom: 20px;
 }
 
+.resume-card__h3 {
+  font-size: 1.5rem;
+}
+
 .resume-nav {
   display: flex;
 }
 
 .resume-nav__header {
-  margin: 10px
+  margin: 20px;
+  font-size: 1.6rem;
 }
 
 .resume-nav__header-underline {
   text-decoration: underline;
+  transform: scale(120%);
 }
 
 .resume-card__header {
@@ -91,9 +101,13 @@ main {
   border: none;
 }
 
+.trash-icon {
+  transform: scale(170%);
+}
+
 .trash-icon:hover {
   cursor: pointer;
-  transform: scale(120%);
+  transform: scale(200%);
 }
 
 .resume-form {
@@ -114,8 +128,17 @@ main {
   border-radius: 7px;
   padding: 10px;
   background-color: var(--primary-color);
+  color: white;
   width: 48%;
   transition: 250ms all;
+}
+
+.btn-big {
+  width: 100%;
+}
+
+.submit {
+  background-color: var(--secondary);
 }
 
 .add-new-btn {
@@ -125,4 +148,8 @@ main {
 .btn:hover {
   cursor: pointer;
   background-color: var(--primary-dark)
+}
+
+.submit:hover {
+  background-color: var(--secondary-dark);
 }
