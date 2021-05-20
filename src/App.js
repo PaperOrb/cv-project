@@ -12,46 +12,41 @@ library.add(fab, fas);
 
 function App() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(() => 0);
-  const [componentsData, saveComponentsData] = useState([[{}], [{}], [{}]]); // persists the personal, education, and experience states upon umount
   const sectionsStrings = ["Personal", "Education", "Experience"];
+  const [personal, setPersonal] = useState([{}]);
+  const [education, setEducation] = useState([{}]);
+  const [experience, setExperience] = useState([{}]);
   let CurrentComponent = [Personal, Education, Experience][currentSectionIndex];
+  let currentSectionState = [personal, education, experience][currentSectionIndex];
+  let currentFormSetState = [setPersonal, setEducation, setExperience][currentSectionIndex];
 
   let newComponentData = () => {
-    const copy = JSON.parse(JSON.stringify(componentsData));
-    copy[currentSectionIndex].push({});
-    saveComponentsData(copy);
-  };
-
-  let saveData = (data, index) => {
-    saveComponentsData((prevComponentArr) => {
-      let copy = JSON.parse(JSON.stringify(prevComponentArr));
-      copy[currentSectionIndex][index] = data;
-      return copy;
-    });
+    const copy = JSON.parse(JSON.stringify(currentSectionState));
+    copy.push({});
+    currentFormSetState(copy);
   };
 
   let deleteForm = (formIndex) => {
-    saveComponentsData((prevComponentArr) => {
+    currentFormSetState((prevComponentArr) => {
       let copy = JSON.parse(JSON.stringify(prevComponentArr));
-      copy[currentSectionIndex].splice(formIndex, 1);
+      copy.splice(formIndex, 1);
       return copy;
     });
   };
 
-  let newComponent = (Component, index, data = {}) => {
+  let newComponent = (Component, index) => {
     return (
       <Component
-        deleteForm={deleteForm}
         handleInput={handleInput}
-        componentsData={data}
-        currentCompIndex={index}
+        currentFormState={currentSectionState[index]}
+        formIndex={index}
         key={index}
       />
     );
   };
 
   let renderComponents = () => {
-    let currentSection = JSON.parse(JSON.stringify(componentsData[currentSectionIndex]));
+    let currentSection = JSON.parse(JSON.stringify(currentSectionState));
     return currentSection.map((data, index) => {
       return newComponent(CurrentComponent, index, data);
     });
@@ -79,17 +74,17 @@ function App() {
     }
   };
 
-  let handleInput = (event, currentCompIndex, data, setData) => {
+  let handleInput = (event, formIndex) => {
     let { name, value, type } = event.target;
-    const dataCopy = JSON.parse(JSON.stringify(data));
-    dataCopy[name] = value;
-    if (type === "text") setData(dataCopy);
-    saveData(dataCopy, currentCompIndex);
+    let formObj = { ...currentSectionState[formIndex] };
+    formObj[name] = value;
+    const sectionCopy = JSON.parse(JSON.stringify(currentSectionState));
+    sectionCopy[formIndex] = formObj;
+    if (type === "text") currentFormSetState(sectionCopy);
   };
 
   let handleSubmit = (event) => {
     event.preventDefault();
-    console.log("yep");
   };
 
   return (

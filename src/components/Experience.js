@@ -1,23 +1,26 @@
-import React, { useState } from "react";
 import FormHeader from "./FormHeader";
 
-const Experience = ({ componentsData, currentCompIndex, handleInput }) => {
-  const [experience, setExperience] = useState(componentsData);
-
+const Experience = ({ currentFormState, handleInput, formIndex }) => {
   let inputCallback = (event) => {
-    handleInput(event, currentCompIndex, experience, setExperience);
+    handleInput(event, formIndex);
   };
 
   return (
     <div className="resume-card">
-      <FormHeader formIndex={currentCompIndex} sectionTitle="Experience" />
+      <FormHeader formIndex={formIndex} sectionTitle="Experience" />
 
       <div className="input-grid">
-        <input type="text" value={experience.name || ""} name="name" placeholder="Name" onChange={inputCallback} />
-        <input type="text" value={experience.age || ""} name="age" placeholder="Age" onChange={inputCallback} />
         <input
           type="text"
-          value={experience.address || ""}
+          value={currentFormState.name || ""}
+          name="name"
+          placeholder="Name"
+          onChange={inputCallback}
+        />
+        <input type="text" value={currentFormState.age || ""} name="age" placeholder="Age" onChange={inputCallback} />
+        <input
+          type="text"
+          value={currentFormState.address || ""}
           name="address"
           placeholder="Address"
           onChange={inputCallback}
