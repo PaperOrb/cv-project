@@ -9,14 +9,24 @@ function FormHeader({ sectionTitle, formIndex }) {
     deleteForm(formIndex);
   };
 
+  let DeleteButton = () => {
+    if (sectionTitle === "Personal") {
+      return "";
+    } else {
+      return (
+        <button className="trash-button" onClick={handleClick}>
+          <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />
+        </button>
+      );
+    }
+  };
+
   return (
     <header className="resume-card__header">
       <h3 className="resume-card__h3">
         {sectionTitle} {formIndex + 1}
       </h3>
-      <button className="trash-button" onClick={handleClick}>
-        <FontAwesomeIcon icon={["fas", "trash"]} className="trash-icon" />
-      </button>
+      {<DeleteButton />}
     </header>
   );
 }
