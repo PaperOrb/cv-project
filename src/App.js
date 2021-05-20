@@ -76,11 +76,12 @@ function App() {
 
   let handleInput = (event, formIndex) => {
     let { name, value, type } = event.target;
-    let formObj = { ...currentSectionState[formIndex] };
-    formObj[name] = value;
+    let formObjCopy = { ...currentSectionState[formIndex] };
     const sectionCopy = JSON.parse(JSON.stringify(currentSectionState));
-    sectionCopy[formIndex] = formObj;
-    if (type === "text") currentFormSetState(sectionCopy);
+
+    formObjCopy[name] = value;
+    sectionCopy[formIndex] = formObjCopy;
+    if (["text", "date"].includes(type)) currentFormSetState(sectionCopy);
   };
 
   let handleSubmit = (event) => {

@@ -17,7 +17,20 @@ const Personal = ({ currentFormState, handleInput, formIndex }) => {
           placeholder="Name"
           onChange={inputCallback}
         />
-        <input type="text" value={currentFormState.age || ""} name="age" placeholder="Age" onChange={inputCallback} />
+        <input
+          type="text"
+          value={currentFormState.email || ""}
+          name="email"
+          placeholder="Email"
+          onChange={inputCallback}
+        />
+        <input
+          type="text"
+          value={currentFormState.phone || ""}
+          name="phone"
+          placeholder="Phone"
+          onChange={inputCallback}
+        />
         <input
           type="text"
           value={currentFormState.address || ""}
