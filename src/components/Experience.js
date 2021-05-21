@@ -12,22 +12,22 @@ const Experience = ({ currentFormState, handleInput, formIndex }) => {
       <div className="input-grid">
         <input
           type="text"
-          value={currentFormState.company || ""}
-          name="company"
+          value={currentFormState["Company Name"] || ""}
+          name="Company Name"
           placeholder="Company Name"
           onChange={inputCallback}
         />
         <input
           type="text"
-          value={currentFormState.position || ""}
-          name="position"
+          value={currentFormState["Position"] || ""}
+          name="Position"
           placeholder="Position"
           onChange={inputCallback}
         />
         <input
           type="text"
-          value={currentFormState.responsibilities || ""}
-          name="responsibilities"
+          value={currentFormState["Responsibilities"] || ""}
+          name="Responsibilities"
           placeholder="Responsibilities"
           onChange={inputCallback}
         />
@@ -35,9 +35,9 @@ const Experience = ({ currentFormState, handleInput, formIndex }) => {
           <br />
           Start date:
         </label>
-        <input type="date" value={currentFormState.from || ""} name="from" onChange={inputCallback} />
+        <input type="date" value={currentFormState["Start Date"] || ""} name="Start Date" onChange={inputCallback} />
         <label>End date:</label>
-        <input type="date" value={currentFormState.to || ""} name="to" onChange={inputCallback} />
+        <input type="date" value={currentFormState["End Date"] || ""} name="End Date" onChange={inputCallback} />
       </div>
     </div>
   );

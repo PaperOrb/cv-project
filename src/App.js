@@ -18,10 +18,10 @@ function App() {
   const [personal, setPersonal] = useState([{}]);
   const [education, setEducation] = useState([{}]);
   const [experience, setExperience] = useState([{}]);
-  const [finalResume, setFinalResume] = useState([personal, education, experience]);
   let CurrentComponent = [Personal, Education, Experience, FinalResume][currentSectionIndex];
+  let finalResume = [personal, education, experience];
   let currentSectionState = [personal, education, experience, finalResume][currentSectionIndex];
-  let currentFormSetState = [setPersonal, setEducation, setExperience, setFinalResume][currentSectionIndex];
+  let currentFormSetState = [setPersonal, setEducation, setExperience][currentSectionIndex];
 
   let newComponentData = () => {
     const copy = JSON.parse(JSON.stringify(currentSectionState));
@@ -37,22 +37,30 @@ function App() {
     });
   };
 
-  let newComponent = (Component, index) => {
+  let newComponent = (Component, index, formObj = null) => {
     return (
       <Component
         handleInput={handleInput}
         currentFormState={currentSectionState[index]}
         formIndex={index}
+        formObj={formObj}
         key={index}
       />
     );
   };
 
   let renderComponents = () => {
-    let currentSection = JSON.parse(JSON.stringify(currentSectionState));
-    return currentSection.map((data, index) => {
-      return newComponent(CurrentComponent, index, data);
-    });
+    if (currentSectionState === finalResume) {
+      let flatResumeArr = finalResume.flat();
+      return flatResumeArr.map((formObj, index) => {
+        return newComponent(CurrentComponent, index, formObj);
+      });
+    } else {
+      let currentSection = JSON.parse(JSON.stringify(currentSectionState));
+      return currentSection.map((data, index) => {
+        return newComponent(CurrentComponent, index);
+      });
+    }
   };
 
   let navigateSections = (event) => {
@@ -82,7 +90,7 @@ function App() {
     let formObjCopy = { ...currentSectionState[formIndex] };
     const sectionCopy = JSON.parse(JSON.stringify(currentSectionState));
 
-    formObjCopy[name] = value;
+    formObjCopy[name.toString()] = value;
     sectionCopy[formIndex] = formObjCopy;
     if (["text", "date"].includes(type)) currentFormSetState(sectionCopy);
   };

@@ -12,29 +12,29 @@ const Personal = ({ currentFormState, handleInput, formIndex }) => {
       <div className="input-grid">
         <input
           type="text"
-          value={currentFormState.name || ""}
-          name="name"
+          value={currentFormState["Name"] || ""}
+          name="Name"
           placeholder="Name"
           onChange={inputCallback}
         />
         <input
           type="text"
-          value={currentFormState.email || ""}
-          name="email"
+          value={currentFormState["Email"] || ""}
+          name="Email"
           placeholder="Email"
           onChange={inputCallback}
         />
         <input
           type="text"
-          value={currentFormState.phone || ""}
-          name="phone"
+          value={currentFormState["Phone"] || ""}
+          name="Phone"
           placeholder="Phone"
           onChange={inputCallback}
         />
         <input
           type="text"
-          value={currentFormState.address || ""}
-          name="address"
+          value={currentFormState["Address"] || ""}
+          name="Address"
           placeholder="Address"
           onChange={inputCallback}
         />

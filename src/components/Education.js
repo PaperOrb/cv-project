@@ -12,15 +12,15 @@ const Education = ({ currentFormState, handleInput, formIndex }) => {
       <div className="input-grid">
         <input
           type="text"
-          value={currentFormState.schoolName || ""}
-          name="schoolName"
+          value={currentFormState["School Name"] || ""}
+          name="School Name"
           placeholder="School Name"
           onChange={inputCallback}
         />
         <input
           type="text"
-          value={currentFormState.degree || ""}
-          name="degree"
+          value={currentFormState["Degree"] || ""}
+          name="Degree"
           placeholder="Degree"
           onChange={inputCallback}
         />
@@ -28,9 +28,9 @@ const Education = ({ currentFormState, handleInput, formIndex }) => {
           <br />
           Start date:
         </label>
-        <input type="date" value={currentFormState.from || ""} name="from" onChange={inputCallback} />
+        <input type="date" value={currentFormState["Start Date"] || ""} name="Start Date" onChange={inputCallback} />
         <label>End date:</label>
-        <input type="date" value={currentFormState.to || ""} name="to" onChange={inputCallback} />
+        <input type="date" value={currentFormState["End Date"] || ""} name="End Date" onChange={inputCallback} />
       </div>
     </div>
   );
