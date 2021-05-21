@@ -1,5 +1,5 @@
 const FinalResume = ({ formObj }) => {
-  let RenderResume = () => {
+  let RenderFormObj = () => {
     let formObjKeys = Object.keys(formObj);
     let formObjVals = Object.values(formObj);
     let fieldsArr = formObjKeys.map((key, index) => {
@@ -10,10 +10,10 @@ const FinalResume = ({ formObj }) => {
         </div>
       );
     });
-    return <div className="resume-card">{fieldsArr}</div>;
+    return fieldsArr;
   };
 
-  return RenderResume();
+  return RenderFormObj();
 };
 
 export default FinalResume;

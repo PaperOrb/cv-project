@@ -52,9 +52,11 @@ function App() {
   let renderComponents = () => {
     if (currentSectionState === finalResume) {
       let flatResumeArr = finalResume.flat();
-      return flatResumeArr.map((formObj, index) => {
+      let resumeObjects = flatResumeArr.map((formObj, index) => {
         return newComponent(CurrentComponent, index, formObj);
       });
+
+      return <div className="resume-card">{resumeObjects}</div>;
     } else {
       let currentSection = JSON.parse(JSON.stringify(currentSectionState));
       return currentSection.map((data, index) => {
