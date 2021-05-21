@@ -153,3 +153,20 @@ main {
 .submit:hover {
   background-color: var(--secondary-dark);
 }
+
+.resume-section {
+  width: 100%;
+  font-size: 1.3rem;
+  padding-bottom:30px;
+  line-height: 30px;
+}
+
+.section-title {
+  border-bottom: 1px solid rgb(192, 192, 192);
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.resume-key {
+  font-weight: 800;
+}

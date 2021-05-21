@@ -23,6 +23,7 @@ const Personal = ({ currentFormState, handleInput, formIndex }) => {
           name="Email"
           placeholder="Email"
           onChange={inputCallback}
+          required
         />
         <input
           type="text"

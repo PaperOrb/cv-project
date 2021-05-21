@@ -15,9 +15,12 @@ library.add(fab, fas);
 function App() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(() => 0);
   const sectionsStrings = ["Personal", "Education", "Experience", "Final Resume"];
-  const [personal, setPersonal] = useState([{}]);
-  const [education, setEducation] = useState([{}]);
-  const [experience, setExperience] = useState([{}]);
+  const [personal, setPersonal] = useState([{ section: "Personal" }]);
+  const [education, setEducation] = useState([{ section: "Education" }]);
+  const [experience, setExperience] = useState([{ section: "Experience" }]);
+  let currentSectionString = sectionsStrings[currentSectionIndex];
+  let sectionTitle =
+    currentSectionString === "Personal" ? currentSectionString : currentSectionString + " " + currentSectionIndex;
   let CurrentComponent = [Personal, Education, Experience, FinalResume][currentSectionIndex];
   let finalResume = [personal, education, experience];
   let currentSectionState = [personal, education, experience, finalResume][currentSectionIndex];
@@ -25,7 +28,7 @@ function App() {
 
   let newComponentData = () => {
     const copy = JSON.parse(JSON.stringify(currentSectionState));
-    copy.push({});
+    copy.push({ section: sectionTitle });
     currentFormSetState(copy);
   };
 
